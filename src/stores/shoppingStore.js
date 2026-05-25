@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 
 export const useShoppingStore = defineStore('shopping', {
   state: () => ({
-    items: []
+    items: [],
   }),
 
   actions: {
@@ -29,14 +29,14 @@ export const useShoppingStore = defineStore('shopping', {
         this.items.push({
           id: Date.now(),
           name: name.trim(),
-          purchased: false
+          purchased: false,
         })
         this.saveToStorage() // Сохраняем после каждого изменения
       }
     },
 
     togglePurchased(id) {
-      const item = this.items.find(item => item.id === id)
+      const item = this.items.find((item) => item.id === id)
       if (item) {
         item.purchased = !item.purchased
         this.saveToStorage() // Сохраняем после каждого изменения
@@ -44,19 +44,19 @@ export const useShoppingStore = defineStore('shopping', {
     },
 
     removeItem(id) {
-      this.items = this.items.filter(item => item.id !== id)
+      this.items = this.items.filter((item) => item.id !== id)
       this.saveToStorage() // Сохраняем после каждого изменения
     },
 
     clearPurchased() {
-      this.items = this.items.filter(item => !item.purchased)
+      this.items = this.items.filter((item) => !item.purchased)
       this.saveToStorage() // Сохраняем после каждого изменения
-    }
+    },
   },
 
   getters: {
-    activeItems: (state) => state.items.filter(item => !item.purchased),
-    purchasedItems: (state) => state.items.filter(item => item.purchased),
-    hasPurchased: (state) => state.items.some(item => item.purchased)
-  }
+    activeItems: (state) => state.items.filter((item) => !item.purchased),
+    purchasedItems: (state) => state.items.filter((item) => item.purchased),
+    hasPurchased: (state) => state.items.some((item) => item.purchased),
+  },
 })
